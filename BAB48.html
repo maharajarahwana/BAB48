@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB48</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>BAB1</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Latihan Kosakata</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .card {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  input {
+    width: 90%;
+    padding: 8px;
+    margin-top: 15px;
+  }
+  button {
+    margin-top: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+  }
+  .result {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .wrong { color: red; }
+  .correct { color: green; }
+  ol { text-align:left; max-height:400px; overflow:auto; }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2 id="question"></h2>
+  <input type="text" id="answerInput" placeholder="Tulis jawaban di sini">
+  <br>
+  <button id="nextBtn">Selanjutnya</button>
+</div>
+
+<script>
+let questions = [
+{ soal: "선체 건조", jawaban: "konstruksi kapal" },
+{ soal: "안전 로프", jawaban: "tali pengaman" },
+{ soal: "예상", jawaban: "ekspektasi / perkiraan" },
+{ soal: "수평", jawaban: "horizontal" },
+{ soal: "강관", jawaban: "pipa baja" },
+{ soal: "수직", jawaban: "tegak lurus" },
+{ soal: "조선업", jawaban: "industri pembuatan kapal" },
+{ soal: "대각선", jawaban: "diagonal" },
+{ soal: "조타실", jawaban: "ruang kemudi" },
+{ soal: "안전성", jawaban: "stabilitas / keamanan" },
+{ soal: "선원실", jawaban: "ruang kru" },
+{ soal: "지지대", jawaban: "penopang" },
+{ soal: "갑판", jawaban: "dek" },
+{ soal: "세우다", jawaban: "mendirikan / mengatur" },
+{ soal: "선수부", jawaban: "bagian haluan kapal" },
+{ soal: "임시로", jawaban: "sementara" },
+{ soal: "중앙부", jawaban: "bagian tengah" },
+{ soal: "구조물", jawaban: "struktur" },
+{ soal: "프로펠러", jawaban: "baling-baling kapal" },
+{ soal: "능률", jawaban: "efisiensi" },
+{ soal: "선미부", jawaban: "bagian buritan" },
+{ soal: "품질", jawaban: "kualitas" },
+{ soal: "변색", jawaban: "perubahan warna" },
+{ soal: "정기적", jawaban: "secara teratur" },
+{ soal: "분사하다", jawaban: "menyemprot" },
+{ soal: "고장", jawaban: "rusak" },
+{ soal: "균열", jawaban: "retakan" },
+{ soal: "고객", jawaban: "pelanggan" },
+{ soal: "녹", jawaban: "karat" },
+{ soal: "맞추다", jawaban: "menyesuaikan" },
+{ soal: "에어 스프레이 건", jawaban: "pistol semprot udara" },
+{ soal: "만족", jawaban: "kepuasan" },
+{ soal: "페인트 / 도료", jawaban: "cat / pelapis" },
+{ soal: "호스", jawaban: "selang" },
+{ soal: "서두르다", jawaban: "bergegas / mempercepat" },
+{ soal: "에어리스 스프레이 펌프", jawaban: "pompa semprot tanpa udara" },
+{ soal: "대형 선박", jawaban: "kapal besar" },
+{ soal: "안전 난간", jawaban: "pagar pengaman" },
+{ soal: "특수 선박", jawaban: "kapal khusus" },
+{ soal: "물기", jawaban: "kelembapan / basah" },
+{ soal: "정부", jawaban: "pemerintah" },
+{ soal: "부식", jawaban: "korosi" },
+{ soal: "주도", jawaban: "memimpin" },
+{ soal: "면적", jawaban: "luas area" },
+{ soal: "핵심", jawaban: "inti" },
+{ soal: "매끄럽다", jawaban: "halus" },
+{ soal: "경쟁력", jawaban: "daya saing" },
+{ soal: "마무리하다", jawaban: "menyelesaikan" },
+{ soal: "갖추다", jawaban: "melengkapi / menyiapkan" },
+{ soal: "골고루", jawaban: "merata / seimbang" },
+{ soal: "점유율", jawaban: "pangsa (pasar)" },
+{ soal: "금이 가다", jawaban: "retak" },
+{ soal: "선체 표면", jawaban: "permukaan lambung kapal" },
+{ soal: "차지하다", jawaban: "menempati" },
+{ soal: "완전히", jawaban: "sepenuhnya" },
+{ soal: "가스운반선", jawaban: "kapal pengangkut gas" },
+{ soal: "붓", jawaban: "kuas" },
+{ soal: "유조선", jawaban: "kapal tanker minyak" },
+{ soal: "비계 설치", jawaban: "memasang perancah" },
+{ soal: "확보하다", jawaban: "mengamankan" },
+{ soal: "장선", jawaban: "balok penyangga" },
+{ soal: "경기 침체", jawaban: "resesi ekonomi" },
+{ soal: "띠장", jawaban: "balok pengikat" },
+{ soal: "경쟁의 심화", jawaban: "persaingan yang semakin ketat" },
+{ soal: "밑받침 철물", jawaban: "perangkat keras penopang bawah" },
+{ soal: "인해", jawaban: "karena" },
+{ soal: "밑둥잡이", jawaban: "penopang bawah" },
+{ soal: "다소", jawaban: "agak / beberapa" },
+{ soal: "비계 기둥", jawaban: "tiang perancah" },
+{ soal: "극복하다", jawaban: "mengatasi" },
+{ soal: "깔판", jawaban: "palet" },
+{ soal: "기술 혁신", jawaban: "inovasi teknologi" },
+{ soal: "가새", jawaban: "penguat / penjepit" },
+{ soal: "강화하다", jawaban: "memperkuat" },
+{ soal: "작업 발판", jawaban: "pijakan kerja" },
+{ soal: "노력을 끊임없이 하다", jawaban: "berusaha terus-menerus" }
+];
+
+// Acak soal
+questions = questions.sort(() => Math.random() - 0.5);
+
+let index = 0;
+let score = 0;
+let userAnswers = [];
+
+const questionEl = document.getElementById("question");
+const answerInput = document.getElementById("answerInput");
+const nextBtn = document.getElementById("nextBtn");
+const card = document.querySelector(".card");
+
+function showQuestion() {
+  questionEl.textContent = "Soal " + (index + 1) + ": " + questions[index].soal;
+  answerInput.value = "";
+  answerInput.focus();
+}
+
+nextBtn.addEventListener("click", () => {
+  const userAnswer = answerInput.value.trim().toLowerCase();
+  userAnswers[index] = userAnswer; // simpan jawaban sesuai index
+
+  if (userAnswer === questions[index].jawaban) {
+    score++;
+  }
+
+  index++;
+  if (index < questions.length) {
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  let answerList = "";
+  questions.forEach((q, i) => {
+    if (userAnswers[i] === q.jawaban) {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span></li>`;
+    } else {
+      answerList += `<li>${q.soal} = <span class="correct">${q.jawaban}</span><br>
+                     Jawaban kamu: <span class="wrong">${userAnswers[i] || "(kosong)"}</span></li>`;
+    }
+  });
+
+  card.innerHTML = `
+    <h2>Hasil</h2>
+    <p class="result">Nilai: ${score} / ${questions.length}</p>
+    <hr>
+    <p>Kunci Jawaban:</p>
+    <ol>${answerList}</ol>
+  `;
+}
+
+showQuestion();
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>
